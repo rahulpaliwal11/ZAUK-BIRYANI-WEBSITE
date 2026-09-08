@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bannerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5E1438"/>
+      <stop offset="50%" stop-color="#541232"/>
+      <stop offset="100%" stop-color="#460D28"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF5"/>
+      <stop offset="40%" stop-color="#FCEAA8"/>
+      <stop offset="100%" stop-color="#ECCB77"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Royal Plum Background -->
+  <rect width="700" height="240" fill="url(#bannerBg)" rx="12"/>
+
+  <!-- Subtle Inner Border -->
+  <rect x="6" y="6" width="688" height="228" fill="none" stroke="#ECCB77" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+
+  <!-- Brand Title: Z O U K with Center Diamond in O -->
+  <g fill="url(#goldText)" stroke="#ECCB77" stroke-width="0.5">
+    <!-- Letter Z -->
+    <path d="M 125 50 L 225 50 L 225 64 L 148 152 L 228 152 L 228 166 L 122 166 L 122 152 L 199 64 L 125 64 Z"/>
+
+    <!-- Letter O with Diamond in Center -->
+    <path d="M 295 50 C 335 50 365 76 365 108 C 365 140 335 166 295 166 C 255 166 225 140 225 108 C 225 76 255 50 295 50 Z M 295 65 C 265 65 242 84 242 108 C 242 132 265 151 295 151 C 325 151 348 132 348 108 C 348 84 325 65 295 65 Z"/>
+    <!-- Center Diamond Inside O -->
+    <polygon points="295,94 307,108 295,122 283,108" fill="url(#goldText)"/>
+
+    <!-- Letter U -->
+    <path d="M 390 50 L 406 50 L 406 122 C 406 142 422 153 442 153 C 462 153 478 142 478 122 L 478 50 L 494 50 L 494 122 C 494 151 471 166 442 166 C 413 166 390 151 390 122 Z"/>
+
+    <!-- Letter K -->
+    <path d="M 522 50 L 538 50 L 538 166 L 522 166 Z M 538 114 L 596 50 L 618 50 L 553 121 L 620 166 L 598 166 L 538 125 Z"/>
+  </g>
+
+  <!-- Subtitle Flanking Line Left -->
+  <line x1="85" y1="195" x2="225" y2="195" stroke="url(#goldText)" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- Subtitle Text: BIRYANI & MAIN COURSE -->
+  <text x="350" y="200" text-anchor="middle" font-family="'Montserrat', 'Plus Jakarta Sans', Arial, sans-serif" font-size="18.5" font-weight="700" letter-spacing="4.5" fill="#FFF8DC">
+    BIRYANI &amp; MAIN COURSE
+  </text>
+
+  <!-- Subtitle Flanking Line Right -->
+  <line x1="475" y1="195" x2="615" y2="195" stroke="url(#goldText)" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
