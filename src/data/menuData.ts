@@ -1395,7 +1395,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 'paneer-fried-rice',
     name: 'Paneer Fried Rice',
-    description: 'Soft cottage cheese cubes tossed with seasoned fried rice, vegetables and sauces.',
+    description: 'Veg Preparation soft paneer cube tossed with fried rice, vegetables, and sauces, delivering a rich flavor.',
     price: 219,
     halfPrice: 139,
     category: 'chinese',
