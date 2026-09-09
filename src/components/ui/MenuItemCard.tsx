@@ -50,6 +50,12 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item }) => {
           src={item.imageUrl}
           alt={item.name}
           loading="lazy"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (!target.src.includes('chicken-dum-biryani.jpg')) {
+              target.src = '/images/dishes/chicken-dum-biryani.jpg';
+            }
+          }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
         />
         {/* Dark subtle wine gradient overlay */}
