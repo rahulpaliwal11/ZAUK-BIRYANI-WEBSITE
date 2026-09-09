@@ -33,7 +33,7 @@ export const MENU_ITEMS: MenuItem[] = [
     serves: '2 Pcs (Half) / 4 Pcs (Full)',
     rating: 4.2,
     reviewCount: 153,
-    imageUrl: '/images/dishes/all.jpg',
+    imageUrl: '/images/dishes/vegetable-dum-biryani.jpg',
     tags: ['Clay Pot', 'Saffron Rice', 'Pure Veg'],
     preparationTime: '20 mins',
   },
