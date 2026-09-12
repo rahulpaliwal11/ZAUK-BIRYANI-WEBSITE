@@ -186,67 +186,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
                 </div>
               </div>
 
-              {/* Signature Royal Biryanis 3-Photo Showcase (Replaced text details with real biryani photos) */}
+              {/* Restaurant Highlights Showcase */}
               <div className="my-3.5 pt-3 border-t border-wine-800/90">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] uppercase tracking-wider font-bold text-gold-300 flex items-center gap-1.5">
-                    <Flame className="w-3.5 h-3.5 text-gold-400" />
-                    <span>Signature Royal Dum Biryanis</span>
-                  </span>
-                  <span className="text-[10px] text-cream-300/80 font-medium">100% Charcoal Dum</span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2">
-                  {/* Biryani 1: Royal Chicken Dum */}
-                  <a
-                    href="#menu"
-                    className="group/b relative rounded-xl overflow-hidden aspect-square border border-gold-500/35 hover:border-gold-400 shadow-sm transition-all hover:scale-102 block"
-                    title="Royal Chicken Dum Handi Biryani"
-                  >
-                    <img
-                      src="/images/dishes/chicken-dum-biryani.jpg"
-                      alt="Royal Chicken Dum Handi Biryani"
-                      className="w-full h-full object-cover group-hover/b:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/20 to-transparent opacity-85" />
-                    <span className="absolute bottom-1 left-1 right-1 text-[9px] font-bold text-cream-100 text-center line-clamp-1">
-                      Chicken Dum
-                    </span>
-                  </a>
-
-                  {/* Biryani 2: Earthen Mitti Handi */}
-                  <a
-                    href="#menu"
-                    className="group/b relative rounded-xl overflow-hidden aspect-square border border-gold-500/35 hover:border-gold-400 shadow-sm transition-all hover:scale-102 block"
-                    title="Dough Sealed Mitti Handi Biryani"
-                  >
-                    <img
-                      src="/images/dishes/clay-handi-biryani.jpg"
-                      alt="Dough-Sealed Clay Handi Biryani"
-                      className="w-full h-full object-cover group-hover/b:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/20 to-transparent opacity-85" />
-                    <span className="absolute bottom-1 left-1 right-1 text-[9px] font-bold text-cream-100 text-center line-clamp-1">
-                      Clay Handi
-                    </span>
-                  </a>
-
-                  {/* Biryani 3: Awadhi Kebab Dum */}
-                  <a
-                    href="#menu"
-                    className="group/b relative rounded-xl overflow-hidden aspect-square border border-gold-500/35 hover:border-gold-400 shadow-sm transition-all hover:scale-102 block"
-                    title="Awadhi Kebab Dum Biryani"
-                  >
-                    <img
-                      src="/images/dishes/kebab-dum-biryani.jpg"
-                      alt="Awadhi Kebab Dum Biryani"
-                      className="w-full h-full object-cover group-hover/b:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/20 to-transparent opacity-85" />
-                    <span className="absolute bottom-1 left-1 right-1 text-[9px] font-bold text-cream-100 text-center line-clamp-1">
-                      Kebab Dum
-                    </span>
-                  </a>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2 rounded-xl bg-wine-900/80 border border-gold-500/20">
+                    <span className="text-gold-400 font-serif font-bold text-xs block">Awadhi</span>
+                    <span className="text-[10px] text-cream-300">Royal Flavors</span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-wine-900/80 border border-gold-500/20">
+                    <span className="text-gold-400 font-serif font-bold text-xs block">100% Dum</span>
+                    <span className="text-[10px] text-cream-300">Slow Cooked</span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-wine-900/80 border border-gold-500/20">
+                    <span className="text-gold-400 font-serif font-bold text-xs block">Shahi</span>
+                    <span className="text-[10px] text-cream-300">Heritage</span>
+                  </div>
                 </div>
               </div>
 

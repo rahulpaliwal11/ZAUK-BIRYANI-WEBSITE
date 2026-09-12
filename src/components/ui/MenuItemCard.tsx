@@ -41,25 +41,45 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item }) => {
     }
   };
 
+  const [imgSrc, setImgSrc] = React.useState(item.imageUrl);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setImgSrc(item.imageUrl);
+    setIsLoaded(false);
+  }, [item.imageUrl]);
+
   return (
     <div className="group relative flex flex-col justify-between rounded-3xl bg-wine-card border border-wine-700/80 hover:border-gold-500/60 shadow-card-dark hover:shadow-gold-md transition-all duration-300 overflow-hidden hover:-translate-y-1.5">
       
       {/* Top Image Container */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-wine-950">
+        {!isLoaded && (
+          <div className="absolute inset-0 bg-wine-900/80 animate-pulse flex items-center justify-center z-0">
+            <span className="text-[11px] font-serif text-gold-400/60 tracking-wider">Zauk Feast</span>
+          </div>
+        )}
         <img
-          src={item.imageUrl}
+          src={imgSrc}
           alt={item.name}
           loading="lazy"
-          onError={(e) => {
-            const target = e.currentTarget;
-            if (!target.src.includes('chicken-dum-biryani.jpg')) {
-              target.src = '/images/dishes/chicken-dum-biryani.jpg';
+          onLoad={() => setIsLoaded(true)}
+          onError={() => {
+            const fallback = item.dietary === 'veg' 
+              ? '/images/dishes/vegetable-dum-biryani.jpg' 
+              : item.dietary === 'egg' 
+                ? '/images/dishes/egg-dum-biryani.jpg' 
+                : '/images/dishes/chicken-dum-biryani.jpg';
+            if (imgSrc !== fallback) {
+              setImgSrc(fallback);
             }
           }}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-108 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         {/* Dark subtle wine gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-wine-900 via-transparent to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-wine-900 via-transparent to-black/50 pointer-events-none" />
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">

@@ -250,9 +250,21 @@ export const MenuSection: React.FC = () => {
         </div>
 
         {/* ==========================================
-            VIEW 1: PHYSICAL MENU CARD (4 PAGES)
+            ZERO ITEMS STATE / ACTIVE VIEWS
             ========================================== */}
-        {viewMode === 'physical-card' ? (
+        {MENU_ITEMS.length === 0 ? (
+          <div className="text-center py-20 px-6 bg-wine-card rounded-3xl border border-gold-500/30 max-w-2xl mx-auto shadow-card-dark">
+            <div className="w-16 h-16 rounded-2xl bg-wine-800 border border-gold-500/40 text-gold-400 flex items-center justify-center mx-auto mb-4">
+              <Utensils className="w-8 h-8" />
+            </div>
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-cream-100 mb-2">
+              Menu Items Currently 0
+            </h3>
+            <p className="text-sm text-cream-300/80 max-w-md mx-auto leading-relaxed">
+              No food items are currently listed on the menu. All items have been cleared.
+            </p>
+          </div>
+        ) : viewMode === 'physical-card' ? (
           <PhysicalMenuCardView />
         ) : filteredItems.length === 0 ? (
           /* Empty Search Filter State */
