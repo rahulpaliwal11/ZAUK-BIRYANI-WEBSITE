@@ -65,14 +65,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item }) => {
           loading="lazy"
           onLoad={() => setIsLoaded(true)}
           onError={() => {
-            const fallback = item.dietary === 'veg' 
-              ? '/images/dishes/vegetable-dum-biryani.jpg' 
-              : item.dietary === 'egg' 
-                ? '/images/dishes/egg-dum-biryani.jpg' 
-                : '/images/dishes/chicken-dum-biryani.jpg';
-            if (imgSrc !== fallback) {
-              setImgSrc(fallback);
-            }
+            setIsLoaded(true);
           }}
           className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-108 ${
             isLoaded ? 'opacity-100' : 'opacity-0'

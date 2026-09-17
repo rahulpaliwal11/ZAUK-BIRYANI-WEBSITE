@@ -17,5 +17,21 @@ export const MENU_CATEGORIES = [
   { id: 'extras', label: 'Accompaniments', icon: 'PlusCircle' },
 ] as const;
 
-// All menu items removed as requested (Items = 0)
-export const MENU_ITEMS: MenuItem[] = [];
+export const MENU_ITEMS: MenuItem[] = [
+  {
+    id: 'paneer-fried-rice',
+    name: 'Paneer Fried Rice',
+    description: 'Soft paneer cubes tossed with fragrant fried basmati rice, fresh garden vegetables, and aromatic Indo-Chinese sauces.',
+    price: 199,
+    category: 'chinese',
+    dietary: 'veg',
+    spiceLevel: 'medium',
+    serves: 'Serves 1-2',
+    isBestseller: true,
+    rating: 4.8,
+    reviewCount: 142,
+    imageUrl: '/images/dishes/paneer-fried-rice.jpg',
+    tags: ['Pure Veg', 'Fresh Paneer', 'Wok Tossed', 'Indo-Chinese'],
+    preparationTime: '15-20 mins',
+  },
+];
