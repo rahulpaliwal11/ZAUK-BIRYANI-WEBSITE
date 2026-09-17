@@ -255,16 +255,36 @@ export const MenuSection: React.FC = () => {
         {viewMode === 'physical-card' ? (
           <PhysicalMenuCardView />
         ) : MENU_ITEMS.length === 0 ? (
-          <div className="text-center py-20 px-6 bg-wine-card rounded-3xl border border-gold-500/30 max-w-2xl mx-auto shadow-card-dark">
-            <div className="w-16 h-16 rounded-2xl bg-wine-800 border border-gold-500/40 text-gold-400 flex items-center justify-center mx-auto mb-4">
-              <Utensils className="w-8 h-8" />
+          <div className="text-center py-20 px-6 bg-wine-card rounded-3xl border border-gold-500/35 max-w-2xl mx-auto shadow-card-dark relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gold-gradient" />
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-wine-800 to-wine-900 border border-gold-500/50 text-gold-400 flex items-center justify-center mx-auto mb-5 shadow-gold-sm">
+              <Crown className="w-10 h-10 text-gold-400" />
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-cream-100 mb-2">
-              0 Items in Menu
+            <span className="inline-block px-3.5 py-1 rounded-full bg-wine-800 text-gold-300 text-xs font-bold uppercase tracking-widest border border-gold-500/30 mb-3">
+              {viewMode === 'cards' ? 'Photo Grid View (0 Items)' : 'Digital Menu View (0 Items)'}
+            </span>
+            <h3 className="font-serif text-3xl sm:text-4xl font-black text-cream-100 mb-3">
+              No Menu Items Available
             </h3>
-            <p className="text-sm text-cream-300/80 max-w-md mx-auto leading-relaxed">
-              All food items and photos have been removed as requested. Currently 0 items are listed on the menu.
+            <p className="text-sm text-cream-300/90 max-w-md mx-auto leading-relaxed mb-6 font-light">
+              Our master Khansamas are currently curating and preparing our new royal menu. No dishes are currently listed in this category.
             </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="https://wa.me/918920793479"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 rounded-xl bg-gold-gradient text-wine-950 font-black text-xs uppercase tracking-wider shadow-gold-sm hover:brightness-110 transition-all active:scale-95"
+              >
+                Inquire on WhatsApp
+              </a>
+              <a
+                href="tel:+918920793479"
+                className="px-6 py-2.5 rounded-xl bg-wine-850 hover:bg-wine-800 border border-gold-500/30 text-gold-300 text-xs font-bold transition-all"
+              >
+                Call +91 8920793479
+              </a>
+            </div>
           </div>
         ) : filteredItems.length === 0 ? (
           /* Empty Search Filter State */

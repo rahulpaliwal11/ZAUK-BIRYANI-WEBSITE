@@ -65,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
             {/* Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <a
-                href="#order-hub"
+                href="#menu"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-gradient hover:brightness-110 text-wine-950 font-black text-sm tracking-wider uppercase flex items-center justify-center gap-2 shadow-gold-md hover:shadow-gold-lg transition-all active:scale-95"
               >
                 <Crown className="w-4 h-4 text-wine-950" />
@@ -74,11 +74,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
               </a>
 
               <a
-                href="#gallery"
+                href="#featured"
                 className="w-full sm:w-auto px-7 py-4 rounded-xl bg-wine-900/90 hover:bg-wine-850 border border-gold-500/35 text-cream-100 hover:text-gold-300 font-bold text-sm tracking-wide flex items-center justify-center gap-2 backdrop-blur-md transition-all shadow-sm hover:border-gold-400"
               >
                 <Sparkles className="w-4 h-4 text-gold-400" />
-                <span>Explore Gallery</span>
+                <span>Signature Bestsellers</span>
               </a>
 
               <button

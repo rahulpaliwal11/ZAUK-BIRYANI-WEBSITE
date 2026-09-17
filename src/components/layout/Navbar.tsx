@@ -30,7 +30,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenReservation }) => {
 
   const navLinks = [
     { label: 'Home', href: '#hero' },
-    { label: 'Order Hub', href: '#order-hub' },
+    { label: 'Bestsellers', href: '#featured' },
+    { label: 'Royal Menu', href: '#menu' },
     { label: 'Offers', href: '#offers' },
     { label: 'Our Craft', href: '#craft' },
     { label: 'Story', href: '#about' },
@@ -99,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenReservation }) => {
 
             {/* Prominent Order Now CTA */}
             <a
-              href="#order-hub"
+              href="#menu"
               className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-gold-gradient hover:brightness-110 text-wine-950 font-black text-xs uppercase tracking-wider shadow-gold-sm hover:shadow-gold-md transition-all active:scale-95"
             >
               <Sparkles className="w-3.5 h-3.5" />
