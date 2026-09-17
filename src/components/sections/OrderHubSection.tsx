@@ -1,9 +1,7 @@
 import React from 'react';
 import { RESTAURANT_INFO } from '../../data/restaurantInfo';
-import { useCart } from '../../context/CartContext';
 import { MandalaPattern } from '../ui/MandalaPattern';
 import { 
-  ShoppingBag, 
   MessageCircle, 
   PhoneCall, 
   Sparkles, 
@@ -14,7 +12,6 @@ import {
 } from 'lucide-react';
 
 export const OrderHubSection: React.FC = () => {
-  const { openCart } = useCart();
   const cleanWhatsAppNumber = RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '');
 
   return (
@@ -76,9 +73,13 @@ export const OrderHubSection: React.FC = () => {
             </div>
           </a>
 
-          {/* Card 2: Interactive Menu / Cart Tray */}
-          <div
-            onClick={openCart}
+          {/* Card 2: Party & Bulk Catering Orders */}
+          <a
+            href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(
+              `👑 Hello ${RESTAURANT_INFO.name}! I would like to inquire about Bulk Biryani Handi catering / party order.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative p-6 rounded-3xl bg-gradient-to-b from-wine-800/80 via-wine-900 to-wine-850 border border-gold-500/45 hover:border-gold-400 shadow-card-dark hover:shadow-gold-md transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 cursor-pointer"
           >
             <div className="absolute top-4 right-4 p-2 rounded-full bg-wine-900 text-gold-400 group-hover:bg-gold-500 group-hover:text-wine-950 transition-colors">
@@ -87,24 +88,24 @@ export const OrderHubSection: React.FC = () => {
 
             <div>
               <div className="w-12 h-12 rounded-2xl bg-gold-500/15 border border-gold-500/35 text-gold-400 flex items-center justify-center mb-4 shadow-sm">
-                <ShoppingBag className="w-6 h-6" />
+                <Crown className="w-6 h-6" />
               </div>
               <span className="text-[10px] uppercase tracking-wider text-gold-300 font-extrabold">
-                Direct Royal Perks
+                Parties &amp; Catering
               </span>
               <h3 className="font-serif text-xl font-bold text-cream-100 mt-1">
-                Website Cart Order
+                Bulk Handi Orders
               </h3>
               <p className="text-xs text-cream-200 mt-2 leading-relaxed">
-                Select delicacies from our interactive menu and generate an instant itemized WhatsApp feast order.
+                Pre-order authentic 1kg / 2kg clay handis and Mughlai feast packages for house parties &amp; gatherings.
               </p>
             </div>
 
             <div className="pt-6 mt-4 border-t border-wine-800 flex items-center justify-between text-xs font-bold text-gold-300">
-              <span>Open Feast Tray</span>
+              <span>Inquire Catering</span>
               <span>→</span>
             </div>
-          </div>
+          </a>
 
           {/* Card 3: Direct Phone Call */}
           <a

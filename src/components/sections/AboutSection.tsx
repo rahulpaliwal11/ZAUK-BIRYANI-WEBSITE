@@ -143,7 +143,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenReservation })
             {/* Action buttons */}
             <div className="pt-2 flex flex-wrap gap-4">
               <a
-                href="#menu"
+                href="#order-hub"
                 className="px-6 py-3 rounded-xl bg-gold-gradient hover:brightness-110 text-wine-950 font-bold text-xs uppercase tracking-wider shadow-gold-sm transition-all active:scale-95"
               >
                 Experience The Taste

@@ -28,7 +28,7 @@ export const MenuSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [dietaryFilter, setDietaryFilter] = useState<'all' | 'veg' | 'non-veg'>('all');
-  const [viewMode, setViewMode] = useState<'physical-card' | 'cards' | 'menu-book'>('physical-card');
+  const [viewMode, setViewMode] = useState<'physical-card' | 'cards' | 'menu-book'>('cards');
   const { addItem } = useCart();
 
   // Category Icon Map
@@ -258,10 +258,10 @@ export const MenuSection: React.FC = () => {
               <Utensils className="w-8 h-8" />
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-cream-100 mb-2">
-              Menu Items Currently 0
+              Menu Cleared (0 Items Listed)
             </h3>
             <p className="text-sm text-cream-300/80 max-w-md mx-auto leading-relaxed">
-              No food items are currently listed on the menu. All items have been cleared.
+              All previous menu items and photos have been removed. The menu is ready for new items to be added.
             </p>
           </div>
         ) : viewMode === 'physical-card' ? (

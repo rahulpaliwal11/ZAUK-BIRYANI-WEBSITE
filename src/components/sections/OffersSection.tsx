@@ -5,7 +5,7 @@ import { MandalaPattern } from '../ui/MandalaPattern';
 import { Copy, Check, Tag, Gift, ArrowRight } from 'lucide-react';
 
 export const OffersSection: React.FC = () => {
-  const { showToast, items, applyCoupon, openCart } = useCart();
+  const { showToast } = useCart();
   const [copiedCode, setCopiedCode] = React.useState<string | null>(null);
 
   const handleCopyCode = (code: string) => {
@@ -18,19 +18,11 @@ export const OffersSection: React.FC = () => {
   };
 
   const handleRedeem = (code: string) => {
-    if (items.length > 0) {
-      const res = applyCoupon(code);
-      openCart();
-      if (!res.success) {
-        showToast(res.message, 'info');
-      }
-    } else {
-      navigator.clipboard.writeText(code);
-      showToast(`👑 Code ${code} selected! Add dishes from our royal menu to activate.`, 'info');
-      const menuEl = document.getElementById('menu');
-      if (menuEl) {
-        menuEl.scrollIntoView({ behavior: 'smooth' });
-      }
+    navigator.clipboard.writeText(code);
+    showToast(`👑 Code ${code} copied! Mention this code when placing your order.`, 'success');
+    const hubEl = document.getElementById('order-hub');
+    if (hubEl) {
+      hubEl.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

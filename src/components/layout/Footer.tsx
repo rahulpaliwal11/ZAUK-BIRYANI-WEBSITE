@@ -87,13 +87,8 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs text-cream-300">
               <li>
-                <a href="#featured" className="hover:text-gold-300 transition-colors">
-                  Signature Bestsellers
-                </a>
-              </li>
-              <li>
-                <a href="#menu" className="hover:text-gold-300 transition-colors">
-                  Royal Dum Menu
+                <a href="#order-hub" className="hover:text-gold-300 transition-colors">
+                  Instant Ordering Hub
                 </a>
               </li>
               <li>
