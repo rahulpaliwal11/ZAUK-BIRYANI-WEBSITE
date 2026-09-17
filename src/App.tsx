@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { CartProvider } from './context/CartContext';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
-import { MenuSection } from './components/sections/MenuSection';
 import { OffersSection } from './components/sections/OffersSection';
 import { WhyChooseUs } from './components/sections/WhyChooseUs';
 import { AboutSection } from './components/sections/AboutSection';
@@ -28,7 +27,6 @@ export const App: React.FC = () => {
         {/* Main Content Sections */}
         <main>
           <Hero onOpenReservation={() => setIsReservationOpen(true)} />
-          <MenuSection />
           <OffersSection />
           <WhyChooseUs />
           <AboutSection onOpenReservation={() => setIsReservationOpen(true)} />

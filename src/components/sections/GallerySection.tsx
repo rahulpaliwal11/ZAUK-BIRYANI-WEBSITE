@@ -12,7 +12,6 @@ export const GallerySection: React.FC = () => {
 
   const categories = [
     { id: 'all', label: `All Photos (${GALLERY_ITEMS.length})` },
-    { id: 'dishes', label: 'Royal Handis & Dishes' },
     { id: 'ambience', label: 'Ambience & Dining' },
     { id: 'storefront', label: 'Storefront & Facade' },
     { id: 'craft', label: 'Dum Craft & Kitchen' },

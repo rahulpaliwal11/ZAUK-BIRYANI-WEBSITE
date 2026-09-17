@@ -2,27 +2,6 @@ import { GalleryItem } from '../types';
 
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
-    "id": "gal-sig-chicken-dum",
-    "title": "Royal Chicken Dum Handi Biryani",
-    "category": "dishes",
-    "imageUrl": "/images/dishes/chicken-dum-biryani.jpg",
-    "description": "Roasted succulent chicken leg piece dum cooked with long-grain aged basmati rice, saffron, star anise, and fresh mint."
-  },
-  {
-    "id": "gal-sig-clay-handi",
-    "title": "Signature Charcoal Clay Handi Dum Biryani",
-    "category": "dishes",
-    "imageUrl": "/images/dishes/clay-handi-biryani.jpg",
-    "description": "Dough-sealed authentic earthen clay handi unsealed with steaming aromas of pure desi ghee, golden barista onions, and rich royal spices."
-  },
-  {
-    "id": "gal-sig-kebab-dum",
-    "title": "Awadhi Kebab Dum Biryani Platter",
-    "category": "dishes",
-    "imageUrl": "/images/dishes/kebab-dum-biryani.jpg",
-    "description": "Authentic melt-in-mouth Awadhi kebab patties rested over fragrant saffron basmati rice, served with mint chutney and spiced raita."
-  },
-  {
     "id": "gal-sig-storefront",
     "title": "ZOUK Biryani & Main Course Grand Storefront",
     "category": "storefront",

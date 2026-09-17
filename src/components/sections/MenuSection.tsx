@@ -28,7 +28,7 @@ export const MenuSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [dietaryFilter, setDietaryFilter] = useState<'all' | 'veg' | 'non-veg'>('all');
-  const [viewMode, setViewMode] = useState<'physical-card' | 'cards' | 'menu-book'>('cards');
+  const [viewMode, setViewMode] = useState<'physical-card' | 'cards' | 'menu-book'>('physical-card');
   const { addItem } = useCart();
 
   // Category Icon Map
@@ -252,20 +252,20 @@ export const MenuSection: React.FC = () => {
         {/* ==========================================
             ZERO ITEMS STATE / ACTIVE VIEWS
             ========================================== */}
-        {MENU_ITEMS.length === 0 ? (
+        {viewMode === 'physical-card' ? (
+          <PhysicalMenuCardView />
+        ) : MENU_ITEMS.length === 0 ? (
           <div className="text-center py-20 px-6 bg-wine-card rounded-3xl border border-gold-500/30 max-w-2xl mx-auto shadow-card-dark">
             <div className="w-16 h-16 rounded-2xl bg-wine-800 border border-gold-500/40 text-gold-400 flex items-center justify-center mx-auto mb-4">
               <Utensils className="w-8 h-8" />
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-cream-100 mb-2">
-              Menu Cleared (0 Items Listed)
+              0 Items in Menu
             </h3>
             <p className="text-sm text-cream-300/80 max-w-md mx-auto leading-relaxed">
-              All previous menu items and photos have been removed. The menu is ready for new items to be added.
+              All food items and photos have been removed as requested. Currently 0 items are listed on the menu.
             </p>
           </div>
-        ) : viewMode === 'physical-card' ? (
-          <PhysicalMenuCardView />
         ) : filteredItems.length === 0 ? (
           /* Empty Search Filter State */
           <div className="text-center py-16 px-4 bg-wine-card rounded-3xl border border-wine-700">

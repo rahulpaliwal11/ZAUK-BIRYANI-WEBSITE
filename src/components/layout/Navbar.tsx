@@ -30,7 +30,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenReservation }) => {
 
   const navLinks = [
     { label: 'Home', href: '#hero' },
-    { label: 'Royal Menu', href: '#menu' },
     { label: 'Order Hub', href: '#order-hub' },
     { label: 'Offers', href: '#offers' },
     { label: 'Our Craft', href: '#craft' },
