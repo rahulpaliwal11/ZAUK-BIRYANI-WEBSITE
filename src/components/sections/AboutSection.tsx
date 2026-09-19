@@ -23,20 +23,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenReservation })
           <div className="lg:col-span-6 relative">
             
             {/* Royal Heritage & Dum Craft Visual Card */}
-            <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-2xl shadow-black/80 aspect-[4/3] bg-gradient-to-br from-[#3d0d27] via-wine-950 to-[#19030e] p-8 flex flex-col items-center justify-center text-center">
-              <MandalaPattern size={400} opacity={0.1} spin={true} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-              <div className="relative z-10 space-y-4">
-                <div className="w-20 h-20 rounded-3xl bg-wine-900/90 border border-gold-500/50 flex items-center justify-center mx-auto shadow-gold-md">
-                  <ChefHat className="w-10 h-10 text-gold-400" />
+            <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-2xl shadow-black/80 aspect-[4/3] bg-wine-950 group">
+              <img
+                src="/images/dishes/chicken-65-biryani.jpg"
+                alt="Zauk Royal Awadhi Dum Feast"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/40 to-transparent" />
+              <MandalaPattern size={350} opacity={0.12} spin={true} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+              <div className="absolute bottom-6 left-6 right-6 z-10">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-wine-900/90 border border-gold-500/40 text-gold-300 text-xs font-bold mb-2">
+                  <ChefHat className="w-3.5 h-3.5 text-gold-400" />
+                  <span>Artisan Dum Pukht</span>
                 </div>
-                <div>
-                  <h3 className="font-serif text-2xl font-bold text-cream-100">
-                    The Art of Slow Charcoal Dum
-                  </h3>
-                  <p className="text-xs text-gold-300/90 max-w-sm mx-auto mt-2 font-light leading-relaxed">
-                    Earthen clay pots sealed with natural wheat dough, capturing every drop of steam and royal aroma.
-                  </p>
-                </div>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-cream-100">
+                  Slow-Cooked Awadhi Heritage
+                </h3>
               </div>
             </div>
 

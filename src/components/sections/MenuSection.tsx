@@ -13,7 +13,6 @@ import {
   Leaf, 
   Crown, 
   Drumstick, 
-  GlassWater, 
   HeartHandshake, 
   PlusCircle, 
   Filter,
@@ -36,17 +35,19 @@ export const MenuSection: React.FC = () => {
     switch (id) {
       case 'all': return <Crown className="w-4 h-4" />;
       case 'dum-biryani': return <Flame className="w-4 h-4" />;
-      case 'appetizers': return <Sparkles className="w-4 h-4" />;
-      case 'chinese': return <Utensils className="w-4 h-4" />;
       case 'tandoor': return <Drumstick className="w-4 h-4" />;
-      case 'thalis': return <Crown className="w-4 h-4" />;
+      case 'appetizers': return <Sparkles className="w-4 h-4" />;
       case 'non-veg-main-course': return <Utensils className="w-4 h-4" />;
       case 'veg-main-course': return <Leaf className="w-4 h-4" />;
-      case 'breads': return <Layers className="w-4 h-4" />;
+      case 'thalis': return <Crown className="w-4 h-4" />;
+      case 'ultimate-burgers': return <Utensils className="w-4 h-4" />;
       case 'rolls': return <Flame className="w-4 h-4" />;
-      case 'burger-pav': return <Utensils className="w-4 h-4" />;
+      case 'tandoori-parathas': return <Layers className="w-4 h-4" />;
+      case 'breads': return <Layers className="w-4 h-4" />;
+      case 'fried-rice': return <Utensils className="w-4 h-4" />;
+      case 'platters': return <Crown className="w-4 h-4" />;
+      case 'combos': return <Sparkles className="w-4 h-4" />;
       case 'desserts': return <HeartHandshake className="w-4 h-4" />;
-      case 'beverages-mojito': return <GlassWater className="w-4 h-4" />;
       case 'extras': return <PlusCircle className="w-4 h-4" />;
       default: return <Utensils className="w-4 h-4" />;
     }

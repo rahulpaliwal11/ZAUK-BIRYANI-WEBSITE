@@ -12,9 +12,13 @@ export const GallerySection: React.FC = () => {
 
   const categories = [
     { id: 'all', label: `All Photos (${GALLERY_ITEMS.length})` },
-    { id: 'ambience', label: 'Ambience & Dining' },
-    { id: 'storefront', label: 'Storefront & Facade' },
-    { id: 'craft', label: 'Dum Craft & Kitchen' },
+    { id: 'tandoor', label: 'Tandoor & Starters' },
+    { id: 'curries', label: 'Main Course Curries' },
+    { id: 'biryani', label: 'Biryani & Rice' },
+    { id: 'thalis', label: 'Thalis & Platters' },
+    { id: 'breads', label: 'Breads & Parathas' },
+    { id: 'burgers-rolls', label: 'Burgers & Rolls' },
+    { id: 'desserts', label: 'Desserts' },
   ];
 
   const filteredGallery = GALLERY_ITEMS.filter((item) =>

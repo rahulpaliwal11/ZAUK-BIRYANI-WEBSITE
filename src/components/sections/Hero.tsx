@@ -133,21 +133,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
               </div>
 
               {/* Royal Visual Showcase */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-gradient-to-b from-[#3a0c24] to-[#1e0513] border border-gold-500/30 p-6 flex flex-col items-center justify-center text-center relative">
-                <MandalaPattern size={320} opacity={0.12} spin={true} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+              <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-wine-950 border border-gold-500/30 group/img">
+                <img
+                  src="/images/dishes/round-platter.jpg"
+                  alt="ZOUK Royal Shahi Platter"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
+                />
                 
-                <div className="relative z-10 space-y-3">
-                  <div className="w-16 h-16 rounded-2xl bg-wine-900 border border-gold-500/50 flex items-center justify-center mx-auto shadow-gold-sm">
-                    <Crown className="w-8 h-8 text-gold-400 animate-pulse" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-cream-100">
-                      Authentic Dum Pukht Kitchen
-                    </h3>
-                    <p className="text-xs text-gold-300 font-light mt-0.5">
-                      Handcrafted Earthen Clay Handis &amp; Coal Dum
-                    </p>
-                  </div>
+                {/* Vignette Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/20 to-transparent opacity-85" />
+                
+                {/* Floating Crest Badge */}
+                <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-wine-950/90 backdrop-blur-md border border-gold-500/40 shadow-gold-sm flex items-center gap-1.5">
+                  <Crown className="w-3.5 h-3.5 text-gold-400" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gold-300">Royal Feast</span>
                 </div>
 
                 {/* Bottom Overlay Info */}
@@ -156,7 +155,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
                     📍 Omaxe NRI City Centre
                   </span>
                   <span className="px-2 py-0.5 rounded-lg bg-wine-950/90 backdrop-blur-md border border-wine-700 text-cream-200 text-[10px]">
-                    Open All 7 Days
+                    Fresh Dum Cooked
                   </span>
                 </div>
               </div>

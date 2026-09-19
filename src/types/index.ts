@@ -1,17 +1,19 @@
 export type MenuCategory = 
   | 'all'
   | 'dum-biryani'
-  | 'non-veg-main-course'
-  | 'veg-main-course'
   | 'tandoor'
   | 'appetizers'
+  | 'non-veg-main-course'
+  | 'veg-main-course'
   | 'thalis'
-  | 'breads'
+  | 'ultimate-burgers'
   | 'rolls'
-  | 'chinese'
-  | 'burger-pav'
+  | 'tandoori-parathas'
+  | 'breads'
+  | 'fried-rice'
+  | 'platters'
+  | 'combos'
   | 'desserts'
-  | 'beverages-mojito'
   | 'extras';
 
 export type DietaryType = 'veg' | 'non-veg' | 'egg';
