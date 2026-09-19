@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Logo, ZoukWordmark } from '../ui/Logo';
 import { MandalaPattern } from '../ui/MandalaPattern';
 import { RESTAURANT_INFO } from '../../data/restaurantInfo';
@@ -18,7 +18,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
-  const [activeTab, setActiveTab] = useState<'storefront' | 'dining'>('storefront');
 
   return (
     <section id="hero" className="relative min-h-[94vh] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-wine-950">
@@ -133,50 +132,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
                 <ZoukWordmark size="md" centered={true} />
               </div>
 
-              {/* Real Restaurant Visual Showcase */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-wine-950 border border-gold-500/30 group/img">
-                <img
-                  src={activeTab === 'storefront' ? '/images/restaurant/zouk-storefront.jpg' : '/images/restaurant/zauk-interior-hall.jpg'}
-                  alt="ZOUK Biryani & Main Course Restaurant in Greater Noida"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
-                />
+              {/* Royal Visual Showcase */}
+              <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-gradient-to-b from-[#3a0c24] to-[#1e0513] border border-gold-500/30 p-6 flex flex-col items-center justify-center text-center relative">
+                <MandalaPattern size={320} opacity={0.12} spin={true} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                 
-                {/* Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/20 to-transparent opacity-90" />
-                
-                {/* Floating Crest Badge */}
-                <div className="absolute top-2.5 left-2.5 p-1 rounded-full bg-wine-950/85 backdrop-blur-md border border-gold-500/40 shadow-gold-sm">
-                  <div className="w-8 h-8 rounded-full overflow-hidden">
-                    <img src="/logo.svg" alt="ZOUK Emblem" className="w-full h-full object-contain" />
+                <div className="relative z-10 space-y-3">
+                  <div className="w-16 h-16 rounded-2xl bg-wine-900 border border-gold-500/50 flex items-center justify-center mx-auto shadow-gold-sm">
+                    <Crown className="w-8 h-8 text-gold-400 animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-cream-100">
+                      Authentic Dum Pukht Kitchen
+                    </h3>
+                    <p className="text-xs text-gold-300 font-light mt-0.5">
+                      Handcrafted Earthen Clay Handis &amp; Coal Dum
+                    </p>
                   </div>
                 </div>
 
-                {/* View Switcher Pills */}
-                <div className="absolute top-2.5 right-2.5 flex items-center gap-1 bg-wine-950/90 backdrop-blur-md p-1 rounded-xl border border-gold-500/30">
-                  <button
-                    onClick={() => setActiveTab('storefront')}
-                    className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold transition-all ${
-                      activeTab === 'storefront'
-                        ? 'bg-gold-gradient text-wine-950 shadow-sm'
-                        : 'text-cream-300 hover:text-cream-100'
-                    }`}
-                  >
-                    Storefront
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('dining')}
-                    className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold transition-all ${
-                      activeTab === 'dining'
-                        ? 'bg-gold-gradient text-wine-950 shadow-sm'
-                        : 'text-cream-300 hover:text-cream-100'
-                    }`}
-                  >
-                    Dining Lounge
-                  </button>
-                </div>
-
                 {/* Bottom Overlay Info */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-xs">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-xs z-10">
                   <span className="px-2.5 py-0.5 rounded-lg bg-wine-950/90 backdrop-blur-md border border-gold-500/30 text-gold-300 font-semibold text-[11px]">
                     📍 Omaxe NRI City Centre
                   </span>
