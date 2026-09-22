@@ -4,6 +4,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
 import { FeaturedDishes } from './components/sections/FeaturedDishes';
 import { MenuSection } from './components/sections/MenuSection';
+import { DeliverySection } from './components/sections/DeliverySection';
 import { OffersSection } from './components/sections/OffersSection';
 import { WhyChooseUs } from './components/sections/WhyChooseUs';
 import { AboutSection } from './components/sections/AboutSection';
@@ -22,15 +23,16 @@ export const App: React.FC = () => {
 
   return (
     <CartProvider>
-      <div className="min-h-screen bg-wine-950 text-cream-100 relative selection:bg-gold-500 selection:text-wine-950">
+      <div className="min-h-screen w-full overflow-x-hidden bg-wine-950 text-cream-100 relative selection:bg-gold-500 selection:text-wine-950">
         {/* Sticky Luxury Navbar */}
         <Navbar onOpenReservation={() => setIsReservationOpen(true)} />
 
         {/* Main Content Sections */}
-        <main>
+        <main className="w-full overflow-x-hidden">
           <Hero onOpenReservation={() => setIsReservationOpen(true)} />
           <FeaturedDishes />
           <MenuSection />
+          <DeliverySection />
           <OffersSection />
           <WhyChooseUs />
           <AboutSection onOpenReservation={() => setIsReservationOpen(true)} />

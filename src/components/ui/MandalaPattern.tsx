@@ -15,7 +15,7 @@ export const MandalaPattern: React.FC<MandalaPatternProps> = ({
 }) => {
   return (
     <div
-      className={`pointer-events-none absolute select-none ${spin ? 'animate-spin-slow' : ''} ${className}`}
+      className={`pointer-events-none absolute select-none overflow-hidden ${spin ? 'animate-spin-slow' : ''} ${className}`}
       style={{
         width: `${size}px`,
         height: `${size}px`,

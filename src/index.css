@@ -10,12 +10,17 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
   }
 
   body {
     background-color: #11040B;
     color: #FAF6EE;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

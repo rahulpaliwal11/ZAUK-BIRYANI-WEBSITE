@@ -12,14 +12,14 @@ export const ZoukWordmark: React.FC<{
   centered?: boolean;
 }> = ({ className = '', size = 'md', centered = false }) => {
   const textSize = {
-    sm: 'text-lg tracking-[0.2em]',
-    md: 'text-2xl sm:text-3xl tracking-[0.22em]',
+    sm: 'text-base sm:text-lg tracking-[0.2em]',
+    md: 'text-xl sm:text-2xl 2xl:text-3xl tracking-[0.22em]',
     lg: 'text-3xl sm:text-4xl md:text-5xl tracking-[0.24em]',
   };
 
   const subSize = {
-    sm: 'text-[7px] tracking-[0.28em]',
-    md: 'text-[8.5px] sm:text-[9.5px] tracking-[0.3em]',
+    sm: 'text-[6.5px] sm:text-[7px] tracking-[0.28em]',
+    md: 'text-[7.5px] sm:text-[8.5px] 2xl:text-[9.5px] tracking-[0.3em]',
     lg: 'text-[10px] sm:text-[12px] tracking-[0.32em]',
   };
 
@@ -45,7 +45,7 @@ export const ZoukWordmark: React.FC<{
       </div>
 
       {/* Subtitle: BIRYANI & MAIN COURSE with flanking gold lines */}
-      <div className={`flex items-center gap-2 w-full mt-1.5 ${centered ? 'justify-center' : ''}`}>
+      <div className={`flex items-center gap-1.5 sm:gap-2 w-full mt-1 sm:mt-1.5 ${centered ? 'justify-center' : ''}`}>
         <span className="h-[1.5px] flex-1 bg-gradient-to-r from-transparent via-[#ECCB77]/70 to-[#ECCB77]" />
         <span className={`font-sub uppercase ${subSize[size]} text-cream-100 font-extrabold whitespace-nowrap`}>
           Biryani &amp; Main Course
@@ -63,8 +63,8 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   const sizeMap = {
     xs: 'w-7 h-7',
-    sm: 'w-9 h-9',
-    md: 'w-12 h-12',
+    sm: 'w-8 h-8 sm:w-9 sm:h-9',
+    md: 'w-9 h-9 sm:w-10 sm:h-10 xl:w-11 xl:h-11 2xl:w-12 2xl:h-12',
     lg: 'w-16 h-16',
     xl: 'w-24 h-24',
     '2xl': 'w-32 h-32',
