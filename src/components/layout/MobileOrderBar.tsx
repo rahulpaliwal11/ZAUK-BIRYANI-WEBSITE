@@ -5,7 +5,7 @@ export const MobileOrderBar: React.FC = () => {
   const cleanWhatsAppNumber = RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '');
 
   return (
-    <div className="fixed bottom-6 right-5 z-40 lg:hidden flex items-center justify-center">
+    <div className="fixed bottom-6 right-5 z-40 flex items-center justify-center group">
       {/* Subtle pulsating outer ring */}
       <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-35 animate-ping pointer-events-none" />
 

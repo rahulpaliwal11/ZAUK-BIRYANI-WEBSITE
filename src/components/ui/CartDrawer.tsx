@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import { RESTAURANT_INFO } from '../../data/restaurantInfo';
+import { GREATER_NOIDA_SECTORS } from '../../data/deliveryConfig';
 import { Logo } from './Logo';
 import { 
   X, 
@@ -15,9 +16,7 @@ import {
   MapPin, 
   User, 
   FileText,
-  Truck,
-  Tag,
-  Check
+  Truck
 } from 'lucide-react';
 
 export const CartDrawer: React.FC = () => {
@@ -26,14 +25,15 @@ export const CartDrawer: React.FC = () => {
     isCartOpen,
     closeCart,
     updateQuantity,
-    removeItem,
     clearCart,
     subtotal,
     deliveryFee,
+    deliveryTier,
+    isBeyond10Km,
+    deliveryDistance,
+    deliveryLocationName,
+    updateDeliveryDistance,
     discountAmount,
-    appliedCoupon,
-    applyCoupon,
-    removeCoupon,
     grandTotal,
     generateWhatsAppOrderUrl,
   } = useCart();
@@ -41,30 +41,24 @@ export const CartDrawer: React.FC = () => {
   const [customerName, setCustomerName] = useState('');
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
-  const [couponInput, setCouponInput] = useState('');
-  const [couponError, setCouponError] = useState('');
 
   if (!isCartOpen) return null;
 
   const handleWhatsAppCheckout = () => {
-    const url = generateWhatsAppOrderUrl(customerName, address, notes);
+    const fullAddress = address ? address : deliveryLocationName;
+    const url = generateWhatsAppOrderUrl(customerName, fullAddress, notes);
     window.open(url, '_blank');
   };
 
-  const handleApplyCoupon = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCouponError('');
-    const res = applyCoupon(couponInput);
-    if (!res.success) {
-      setCouponError(res.message);
-    } else {
-      setCouponInput('');
+  const handleSectorChange = (sectorName: string) => {
+    const loc = GREATER_NOIDA_SECTORS.find((s) => s.name === sectorName);
+    if (loc) {
+      updateDeliveryDistance(loc.approxDistanceKm, loc.name);
+      if (!address) {
+        setAddress(loc.name);
+      }
     }
   };
-
-  const freeDeliveryThreshold = 500;
-  const amountToFreeDelivery = Math.max(0, freeDeliveryThreshold - subtotal);
-  const deliveryProgress = Math.min(100, (subtotal / freeDeliveryThreshold) * 100);
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
@@ -98,25 +92,23 @@ export const CartDrawer: React.FC = () => {
             </button>
           </div>
 
-          {/* Free Delivery Bar */}
+          {/* Genuine 10% OFF Notification Banner */}
           {items.length > 0 && (
-            <div className="px-5 py-3 bg-wine-900 border-b border-wine-800">
-              <div className="flex items-center justify-between text-xs mb-1.5">
+            <div className="px-5 py-2.5 bg-gradient-to-r from-wine-900 via-wine-850 to-wine-900 border-b border-gold-500/30">
+              <div className="flex items-center justify-between text-xs">
                 <span className="flex items-center gap-1.5 text-cream-200">
-                  <Truck className="w-3.5 h-3.5 text-gold-400" />
-                  {amountToFreeDelivery === 0 ? (
-                    <span className="text-emerald-400 font-bold">🎉 You unlocked FREE Royal Delivery!</span>
+                  <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                  {subtotal >= 499 ? (
+                    <span className="text-emerald-400 font-bold">✨ 10% OFF Applied on orders above ₹499!</span>
                   ) : (
-                    <span>Add <strong className="text-gold-400">₹{amountToFreeDelivery}</strong> more for Free Delivery</span>
+                    <span>Add <strong className="text-gold-400">₹{499 - subtotal}</strong> more to get <strong>10% OFF</strong></span>
                   )}
                 </span>
-                <span className="text-[10px] text-cream-400">{Math.round(deliveryProgress)}%</span>
-              </div>
-              <div className="w-full h-1.5 bg-wine-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gold-gradient transition-all duration-500 rounded-full shadow-gold-sm"
-                  style={{ width: `${deliveryProgress}%` }}
-                />
+                {subtotal >= 499 && (
+                  <span className="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-bold">
+                    -₹{discountAmount}
+                  </span>
+                )}
               </div>
             </div>
           )}
@@ -130,151 +122,110 @@ export const CartDrawer: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-serif text-lg font-bold text-cream-100">
-                    Your Feast is Empty
+                    Your Feast Tray is Empty
                   </h3>
-                  <p className="text-xs text-cream-300 mt-1 max-w-xs">
-                    Explore our authentic Awadhi Dum Biryani &amp; Royal Main Course to begin your feast.
+                  <p className="text-xs text-cream-400 max-w-xs mt-1 leading-relaxed">
+                    Explore our aromatic Royal Dum Biryanis, sizzling Kebabs, and Mughlai gravies.
                   </p>
                 </div>
                 <button
                   onClick={closeCart}
-                  className="px-6 py-2.5 rounded-xl bg-gold-gradient text-wine-950 font-black text-xs shadow-gold-sm hover:brightness-110 active:scale-95"
+                  className="px-6 py-2.5 rounded-xl bg-gold-gradient text-wine-950 font-bold text-xs uppercase tracking-wider shadow-gold-sm hover:brightness-110 transition-all"
                 >
                   Explore Royal Menu
                 </button>
               </div>
             ) : (
-              items.map((cartItem) => (
-                <div
-                  key={cartItem.item.id}
-                  className="p-3.5 rounded-2xl bg-wine-card border border-wine-700/80 flex gap-3.5 items-center group hover:border-gold-500/40 transition-all"
-                >
-                  {/* Item Image */}
-                  <img
-                    src={cartItem.item.imageUrl}
-                    alt={cartItem.item.name}
-                    className="w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-wine-950 border border-wine-800"
-                  />
-
-                  {/* Details */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <div
-                        className={`w-2 h-2 rounded-full ${
-                          cartItem.item.dietary === 'veg' ? 'bg-emerald-500' : 'bg-red-500'
-                        }`}
-                      />
-                      <h4 className="font-serif text-sm font-bold text-cream-100 truncate">
-                        {cartItem.item.name}
-                      </h4>
-                    </div>
-
-                    <div className="flex items-baseline gap-2 mt-1">
-                      <span className="text-xs font-bold text-gold-400">
-                        ₹{cartItem.item.price * cartItem.quantity}
-                      </span>
-                      <span className="text-[10px] text-cream-400">
-                        (₹{cartItem.item.price} each)
-                      </span>
-                    </div>
-
-                    {/* Quantity Controls */}
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-1.5 bg-wine-800 rounded-lg p-0.5 border border-wine-700">
-                        <button
-                          onClick={() => updateQuantity(cartItem.item.id, -1)}
-                          className="w-5 h-5 rounded flex items-center justify-center text-cream-300 hover:text-cream-100 hover:bg-wine-700 text-xs"
-                          aria-label="Decrease quantity"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="text-xs font-bold text-cream-100 px-1.5">
-                          {cartItem.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(cartItem.item.id, 1)}
-                          className="w-5 h-5 rounded flex items-center justify-center text-cream-300 hover:text-cream-100 hover:bg-wine-700 text-xs"
-                          aria-label="Increase quantity"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
+              <div className="space-y-3">
+                {items.map((cartItem) => {
+                  const { item, quantity } = cartItem;
+                  return (
+                    <div
+                      key={item.id}
+                      className="p-3.5 rounded-2xl bg-wine-900/60 border border-wine-800 hover:border-gold-500/30 transition-all flex items-center justify-between gap-3"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        {item.imageUrl && (
+                          <img
+                            src={item.imageUrl}
+                            alt={item.name}
+                            className="w-14 h-14 rounded-xl object-cover border border-gold-500/20 shrink-0"
+                          />
+                        )}
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span
+                              className={`w-2 h-2 rounded-full shrink-0 ${
+                                item.dietary === 'veg' ? 'bg-emerald-500' : 'bg-rose-500'
+                              }`}
+                            />
+                            <h4 className="font-serif text-xs font-bold text-cream-100 truncate">
+                              {item.name}
+                            </h4>
+                          </div>
+                          <p className="text-[11px] text-gold-300/90 font-medium mt-0.5">
+                            ₹{item.price} each
+                          </p>
+                          <p className="text-xs font-bold text-cream-100 mt-1">
+                            ₹{item.price * quantity}
+                          </p>
+                        </div>
                       </div>
 
-                      <button
-                        onClick={() => removeItem(cartItem.item.id)}
-                        className="text-cream-400 hover:text-rose-400 p-1 text-xs flex items-center gap-1 transition-colors"
-                        aria-label="Remove item"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      {/* Quantity Controller */}
+                      <div className="flex items-center gap-1.5 bg-wine-950 border border-wine-700/80 rounded-xl p-1 shrink-0">
+                        <button
+                          onClick={() => updateQuantity(item.id, -1)}
+                          className="p-1 rounded-lg hover:bg-wine-800 text-cream-300 hover:text-cream-100 transition-colors"
+                          aria-label="Decrease quantity"
+                        >
+                          <Minus className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="w-6 text-center text-xs font-bold text-cream-100 font-mono">
+                          {quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(item.id, 1)}
+                          className="p-1 rounded-lg hover:bg-wine-800 text-cream-300 hover:text-cream-100 transition-colors"
+                          aria-label="Increase quantity"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))
-            )}
-
-            {/* Promo Voucher Code Application */}
-            {items.length > 0 && (
-              <div className="pt-2 border-t border-wine-800 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gold-300 flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-gold-400" />
-                    <span>Royal Privilege Code</span>
-                  </span>
-                  {appliedCoupon && (
-                    <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
-                      <Check className="w-3 h-3" /> Applied
-                    </span>
-                  )}
-                </div>
-
-                {appliedCoupon ? (
-                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-xs">
-                    <div>
-                      <strong className="text-emerald-300 uppercase tracking-wider block">{appliedCoupon}</strong>
-                      <span className="text-emerald-400/80 text-[11px]">Saved ₹{discountAmount} on this order!</span>
-                    </div>
-                    <button
-                      onClick={removeCoupon}
-                      className="text-xs text-cream-400 hover:text-rose-400 font-semibold px-2 py-1 rounded bg-wine-900 border border-wine-700"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleApplyCoupon} className="space-y-1">
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        placeholder="Enter code (e.g. ZAUKROYAL, FIRSTDUM)"
-                        value={couponInput}
-                        onChange={(e) => {
-                          setCouponInput(e.target.value);
-                          setCouponError('');
-                        }}
-                        className="flex-1 bg-wine-900 border border-wine-700 rounded-xl px-3 py-2 text-xs text-cream-100 uppercase placeholder:normal-case placeholder-cream-400/60 focus:outline-none focus:border-gold-500"
-                      />
-                      <button
-                        type="submit"
-                        className="px-4 py-2 rounded-xl bg-gold-gradient text-wine-950 font-black text-xs shadow-gold-sm hover:brightness-110 transition-all"
-                      >
-                        Apply
-                      </button>
-                    </div>
-                    {couponError && (
-                      <p className="text-[11px] text-rose-400 font-medium">{couponError}</p>
-                    )}
-                  </form>
-                )}
+                  );
+                })}
               </div>
             )}
 
-            {/* Guest Order Info Form */}
+            {/* Delivery Location & Instructions Form */}
             {items.length > 0 && (
-              <div className="pt-2 space-y-3 border-t border-wine-800">
-                <p className="text-xs font-bold text-gold-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-gold-400" /> Delivery Information (Optional)
-                </p>
+              <div className="pt-4 border-t border-wine-800 space-y-3">
+                <div className="flex items-center justify-between text-xs font-serif font-bold text-gold-300 uppercase tracking-wider">
+                  <span className="flex items-center gap-1.5">
+                    <Truck className="w-3.5 h-3.5 text-gold-400" />
+                    Delivery Details
+                  </span>
+                  <span className="text-[10px] text-cream-400 font-sans font-normal">
+                    Distance: ~{deliveryDistance} km
+                  </span>
+                </div>
+
+                {/* Quick Sector Selector */}
+                <div>
+                  <select
+                    value={deliveryLocationName}
+                    onChange={(e) => handleSectorChange(e.target.value)}
+                    className="w-full bg-wine-900 border border-wine-700 rounded-xl px-3 py-2 text-xs text-cream-100 focus:outline-none focus:border-gold-500 cursor-pointer"
+                  >
+                    <option value="">Select your Greater Noida Sector / Society</option>
+                    {GREATER_NOIDA_SECTORS.map((s) => (
+                      <option key={s.name} value={s.name} className="bg-wine-950 text-cream-100">
+                        {s.name} (~{s.approxDistanceKm} km)
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div>
                   <div className="relative">
@@ -294,7 +245,7 @@ export const CartDrawer: React.FC = () => {
                     <MapPin className="w-3.5 h-3.5 text-cream-400 absolute left-3 top-2.5" />
                     <input
                       type="text"
-                      placeholder="Delivery Address / Society / Flat No."
+                      placeholder="Complete Delivery Address / Society / Flat No."
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="w-full bg-wine-900 border border-wine-700 rounded-xl pl-9 pr-3 py-2 text-xs text-cream-100 placeholder-cream-400/60 focus:outline-none focus:border-gold-500"
@@ -329,22 +280,27 @@ export const CartDrawer: React.FC = () => {
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-emerald-400 font-semibold">
-                    <span>Discount ({appliedCoupon})</span>
+                    <span>10% OFF (Orders above ₹499)</span>
                     <span>-₹{discountAmount}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-cream-300">
-                  <span>Delivery Charges</span>
+                  <span className="flex items-center gap-1">
+                    <span>Delivery Charge</span>
+                    <span className="text-[10px] text-gold-400/80">
+                      ({deliveryTier?.distanceLabel || (isBeyond10Km ? '>10 KM' : '2–3 KM')})
+                    </span>
+                  </span>
                   <span className="font-semibold text-cream-100">
-                    {deliveryFee === 0 ? (
-                      <span className="text-emerald-400 font-bold">FREE</span>
+                    {isBeyond10Km ? (
+                      <span className="text-amber-400 text-[11px]">Contact Us</span>
                     ) : (
                       `₹${deliveryFee}`
                     )}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-cream-100 pt-2 border-t border-wine-800">
-                  <span className="font-serif">Grand Royal Total</span>
+                  <span className="font-serif">Grand Total</span>
                   <span className="font-serif text-lg text-gold-400">₹{grandTotal}</span>
                 </div>
               </div>

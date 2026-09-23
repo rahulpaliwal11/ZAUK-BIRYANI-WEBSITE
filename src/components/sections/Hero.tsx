@@ -150,12 +150,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
                 </div>
 
                 {/* Bottom Overlay Info */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-xs z-10">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex flex-wrap items-center justify-between gap-1.5 text-xs z-10">
                   <span className="px-2.5 py-0.5 rounded-lg bg-wine-950/90 backdrop-blur-md border border-gold-500/30 text-gold-300 font-semibold text-[11px]">
                     📍 Omaxe NRI City Centre
                   </span>
                   <span className="px-2 py-0.5 rounded-lg bg-wine-950/90 backdrop-blur-md border border-wine-700 text-cream-200 text-[10px]">
-                    Dine-In & Takeaway
+                    Dine-In &amp; Takeaway
                   </span>
                 </div>
               </div>

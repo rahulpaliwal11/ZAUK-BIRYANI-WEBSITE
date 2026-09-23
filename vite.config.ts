@@ -8,5 +8,13 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    watch: {
+      ignored: [
+        '**/food items photos acc to name of food item/**',
+        '**/zauk photos/**',
+        '**/scratch/**',
+        '**/.vercel/**',
+      ],
+    },
   },
 });

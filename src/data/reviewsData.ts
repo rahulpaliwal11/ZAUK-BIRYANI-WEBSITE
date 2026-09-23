@@ -41,7 +41,7 @@ export const SAMPLE_REVIEWS: Review[] = [
     rating: 5,
     date: '3 weeks ago',
     dishRecommended: 'Noorani Paneer Dum Biryani',
-    comment: 'As a vegetarian, finding an authentic dum biryani with rich depth of flavor is rare. Zauk Biryani nailed it! The paneer was incredibly soft, infused with smoky charcoal notes and fragrant spices. We will be ordering every weekend.',
+    comment: 'As a vegetarian, finding an authentic dum biryani with rich depth of flavor is rare. Zouk Biryani nailed it! The paneer was incredibly soft, infused with smoky charcoal notes and fragrant spices. We will be ordering every weekend.',
     verifiedOrder: true,
     avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop',
   },

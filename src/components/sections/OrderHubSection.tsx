@@ -189,7 +189,7 @@ export const OrderHubSection: React.FC = () => {
           <span className="hidden sm:inline text-wine-700">•</span>
           <div className="flex items-center gap-2">
             <Crown className="w-4 h-4 text-gold-400" />
-            <span>Free Burani Garlic Raita with every Biryani</span>
+            <span>Freshly Dum-Cooked in Clay Handis</span>
           </div>
         </div>
       </div>

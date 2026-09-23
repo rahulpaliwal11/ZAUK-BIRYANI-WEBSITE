@@ -18,7 +18,7 @@ export const RESTAURANT_INFO: RestaurantInfo = {
 
   // Contact Details
   phone: "+91 8920793479",
-  whatsapp: "+91 8920793439",
+  whatsapp: "+91 8920793479",
   email: "zoukbiryanimaincourse@gmail.com",
 
   // Physical Location

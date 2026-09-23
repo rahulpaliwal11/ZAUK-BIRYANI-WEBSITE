@@ -1,0 +1,11 @@
+.git
+.gemini
+node_modules
+zauk photos
+zauk photos/**
+"zauk photos"/**
+scratch
+scratch/**
+dist
+.vercel/output
+*.log

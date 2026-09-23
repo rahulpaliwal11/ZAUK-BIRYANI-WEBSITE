@@ -143,6 +143,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenReservation }) => {
             </nav>
 
             <div className="pt-4 border-t border-wine-800 flex flex-col gap-2.5">
+              <a
+                href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                  `Hello ${RESTAURANT_INFO.name}, I would like to place an order!`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full py-3 rounded-xl bg-[#25D366] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm hover:brightness-110"
+              >
+                <span>Order via WhatsApp ({RESTAURANT_INFO.phone})</span>
+              </a>
+
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);

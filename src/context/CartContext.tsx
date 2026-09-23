@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { CartItem, MenuItem } from '../types';
 import { RESTAURANT_INFO } from '../data/restaurantInfo';
+import { getDeliveryFeeByDistance, DeliveryTier, DeliveryCalculationResult } from '../data/deliveryConfig';
 
 interface ToastInfo {
   id: string;
@@ -16,10 +17,16 @@ interface CartContextType {
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
+  deliveryDistance: number;
+  deliveryLocationName: string;
+  updateDeliveryDistance: (distanceKm: number, locationName?: string) => void;
+  deliveryCalculation: DeliveryCalculationResult;
+  deliveryTier: DeliveryTier | null;
   deliveryFee: number;
+  isBeyond10Km: boolean;
   discountAmount: number;
   appliedCoupon: string | null;
-  applyCoupon: (code: string) => { success: boolean; message: string };
+  applyCoupon: (code?: string) => { success: boolean; message: string };
   removeCoupon: () => void;
   grandTotal: number;
   isCartOpen: boolean;
@@ -37,7 +44,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
-      const saved = localStorage.getItem('zauk_cart');
+      const saved = localStorage.getItem('zouk_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -46,9 +53,26 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(() => {
     try {
-      return localStorage.getItem('zauk_coupon') || null;
+      return localStorage.getItem('zouk_coupon') || null;
     } catch {
       return null;
+    }
+  });
+
+  const [deliveryDistance, setDeliveryDistance] = useState<number>(() => {
+    try {
+      const savedDist = localStorage.getItem('zouk_delivery_distance');
+      return savedDist ? parseFloat(savedDist) : 2.5; // Default 2.5 KM (2-3 KM slab -> ₹30)
+    } catch {
+      return 2.5;
+    }
+  });
+
+  const [deliveryLocationName, setDeliveryLocationName] = useState<string>(() => {
+    try {
+      return localStorage.getItem('zouk_delivery_loc') || 'Greater Noida';
+    } catch {
+      return 'Greater Noida';
     }
   });
 
@@ -57,7 +81,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     try {
-      localStorage.setItem('zauk_cart', JSON.stringify(items));
+      localStorage.setItem('zouk_cart', JSON.stringify(items));
     } catch {
       // ignore
     }
@@ -66,14 +90,32 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     try {
       if (appliedCoupon) {
-        localStorage.setItem('zauk_coupon', appliedCoupon);
+        localStorage.setItem('zouk_coupon', appliedCoupon);
       } else {
-        localStorage.removeItem('zauk_coupon');
+        localStorage.removeItem('zouk_coupon');
       }
     } catch {
       // ignore
     }
   }, [appliedCoupon]);
+
+  const updateDeliveryDistance = (distanceKm: number, locationName?: string) => {
+    const safeDist = Math.max(0, distanceKm);
+    setDeliveryDistance(safeDist);
+    if (locationName) {
+      setDeliveryLocationName(locationName);
+      try {
+        localStorage.setItem('zouk_delivery_loc', locationName);
+      } catch {
+        // ignore
+      }
+    }
+    try {
+      localStorage.setItem('zouk_delivery_distance', safeDist.toString());
+    } catch {
+      // ignore
+    }
+  };
 
   const showToast = (message: string, type: 'success' | 'info' = 'success') => {
     const id = Date.now().toString() + Math.random().toString();
@@ -129,68 +171,29 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = items.reduce((sum, i) => sum + i.item.price * i.quantity, 0);
-  const deliveryFee = subtotal > 0 && subtotal < 500 ? 40 : 0;
 
-  // Calculate discount based on applied coupon
-  let discountAmount = 0;
-  if (appliedCoupon) {
-    const code = appliedCoupon.toUpperCase().trim();
-    if (code === 'ZAUKROYAL' || code === 'ZOUKROYAL') {
-      if (subtotal >= 999) {
-        discountAmount = Math.min(300, Math.round(subtotal * 0.20));
-      }
-    } else if (code === 'FIRSTDUM') {
-      if (subtotal >= 500) {
-        discountAmount = 150;
-      }
-    } else if (code === 'MIDWEEKFEAST') {
-      if (subtotal >= 750) {
-        discountAmount = 120;
-      }
-    }
-  }
+  // Centralized Delivery Charge Calculation based on distance tier
+  const deliveryCalculation = getDeliveryFeeByDistance(deliveryDistance);
+  const { fee: calculatedFee, tier: deliveryTier, isBeyond10Km } = deliveryCalculation;
+  const deliveryFee = subtotal > 0 ? (calculatedFee !== null ? calculatedFee : 0) : 0;
+
+  // Discount calculation: 10% OFF on orders of ₹499 or more
+  const discountAmount = subtotal >= 499 ? Math.round(subtotal * 0.10) : 0;
 
   const grandTotal = Math.max(0, subtotal - discountAmount) + deliveryFee;
 
-  const applyCoupon = (rawCode: string): { success: boolean; message: string } => {
-    const code = rawCode.toUpperCase().trim();
-    if (!code) {
-      return { success: false, message: 'Please enter a valid coupon code.' };
+  const applyCoupon = (_rawCode?: string): { success: boolean; message: string } => {
+    if (subtotal >= 499) {
+      setAppliedCoupon('10% OFF');
+      showToast('10% OFF applied on orders above ₹499!');
+      return { success: true, message: '10% OFF applied on orders above ₹499!' };
     }
-
-    if (code === 'ZAUKROYAL' || code === 'ZOUKROYAL') {
-      if (subtotal < 999) {
-        return { success: false, message: 'ZAUKROYAL requires minimum cart value of ₹999.' };
-      }
-      setAppliedCoupon(code);
-      showToast(`👑 Promo ${code} applied! 20% discount added.`);
-      return { success: true, message: '20% Royal Discount Applied!' };
-    }
-
-    if (code === 'FIRSTDUM') {
-      if (subtotal < 500) {
-        return { success: false, message: 'FIRSTDUM requires minimum cart value of ₹500.' };
-      }
-      setAppliedCoupon(code);
-      showToast(`✨ Promo ${code} applied! Flat ₹150 OFF added.`);
-      return { success: true, message: 'Flat ₹150 Discount Applied!' };
-    }
-
-    if (code === 'MIDWEEKFEAST') {
-      if (subtotal < 750) {
-        return { success: false, message: 'MIDWEEKFEAST requires minimum cart value of ₹750.' };
-      }
-      setAppliedCoupon(code);
-      showToast(`🔥 Promo ${code} applied! Free Kebab Platter discount added.`);
-      return { success: true, message: 'Midweek Special Discount Applied!' };
-    }
-
-    return { success: false, message: 'Invalid coupon code. Try ZAUKROYAL or FIRSTDUM.' };
+    return { success: false, message: '10% OFF requires a minimum order of ₹499.' };
   };
 
   const removeCoupon = () => {
     setAppliedCoupon(null);
-    showToast('Promo code removed.');
+    showToast('Offer removed.');
   };
 
   const generateWhatsAppOrderUrl = (
@@ -211,13 +214,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         message += `• ${ci.quantity}x ${ci.item.name} (₹${ci.item.price * ci.quantity})\n`;
       });
       message += `\n💰 *Subtotal:* ₹${subtotal}\n`;
-      if (discountAmount > 0 && appliedCoupon) {
-        message += `🎟️ *Promo Discount (${appliedCoupon}):* -₹${discountAmount}\n`;
+      if (discountAmount > 0) {
+        message += `🎟️ *10% Discount (Orders above ₹499):* -₹${discountAmount}\n`;
       }
-      if (deliveryFee > 0) {
-        message += `🚚 *Delivery Fee:* ₹${deliveryFee}\n`;
+      if (isBeyond10Km) {
+        message += `🚚 *Delivery:* Beyond 10 KM (Please contact restaurant to confirm)\n`;
+      } else if (deliveryFee > 0) {
+        message += `🚚 *Delivery Charge (${deliveryTier?.distanceLabel || 'Standard'}):* ₹${deliveryFee}\n`;
       } else {
-        message += `🚚 *Delivery:* FREE (Royal Perk)\n`;
+        message += `🚚 *Delivery:* ₹0\n`;
       }
       message += `👑 *Total Amount Payable:* ₹${grandTotal}\n`;
     }
@@ -227,12 +232,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     if (address) {
       message += `\n📍 *Delivery Address:* ${address}`;
+    } else if (deliveryLocationName) {
+      message += `\n📍 *Delivery Location:* ${deliveryLocationName} (~${deliveryDistance} km)`;
     }
     if (notes) {
       message += `\n📝 *Special Instructions:* ${notes}`;
     }
 
-    message += `\n\nPlease confirm order acceptance & estimated delivery time. Thank you!`;
+    const estTime = deliveryTier?.estimatedTime || '35–45 mins';
+    message += `\n\nPlease confirm order acceptance & estimated delivery time (${estTime}). Thank you!`;
 
     const encodedMsg = encodeURIComponent(message);
     return `https://wa.me/${cleanNumber}?text=${encodedMsg}`;
@@ -248,7 +256,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         clearCart,
         totalItems,
         subtotal,
+        deliveryDistance,
+        deliveryLocationName,
+        updateDeliveryDistance,
+        deliveryCalculation,
+        deliveryTier,
         deliveryFee,
+        isBeyond10Km,
         discountAmount,
         appliedCoupon,
         applyCoupon,

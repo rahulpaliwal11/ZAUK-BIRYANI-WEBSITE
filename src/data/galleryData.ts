@@ -238,13 +238,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     description: 'Tandoori chicken simmered in a velvety yoghurt and cashew cream gravy.',
   },
   {
-    id: 'gal-murgh-irani',
-    title: 'Murgh Irani',
-    category: 'curries',
-    imageUrl: '/images/dishes/murgh-irani.jpg',
-    description: 'Saffron-infused chicken curry delicately simmered in cream and nuts.',
-  },
-  {
     id: 'gal-dal-makhani',
     title: 'Dal Makhani',
     category: 'curries',

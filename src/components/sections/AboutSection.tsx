@@ -19,46 +19,64 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenReservation })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Image Collage & Royal Seal */}
+          {/* Left Column: Food Card Showcase */}
           <div className="lg:col-span-6 relative">
-            
-            {/* Royal Heritage & Dum Craft Visual Card */}
-            <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 shadow-2xl shadow-black/80 aspect-[4/3] bg-wine-950 group">
-              <img
-                src="/images/dishes/chicken-65-biryani.jpg"
-                alt="Zauk Royal Awadhi Dum Feast"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-wine-950 via-wine-950/40 to-transparent" />
-              <MandalaPattern size={350} opacity={0.12} spin={true} className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-wine-900/90 border border-gold-500/40 text-gold-300 text-xs font-bold mb-2">
-                  <ChefHat className="w-3.5 h-3.5 text-gold-400" />
-                  <span>Artisan Dum Pukht</span>
+            {/* Unified Royal Heritage & Dum Craft Card */}
+            <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 bg-wine-card shadow-2xl shadow-black/80 flex flex-col group hover:border-gold-400/70 transition-all duration-500">
+              
+              {/* 1. Top Food Image Container */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-wine-950">
+                <img
+                  src="/images/dishes/chicken-65-biryani.jpg"
+                  alt="Zouk Royal Awadhi Dum Feast"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-wine-950/70 via-transparent to-black/30 pointer-events-none" />
+                
+                {/* Clean Top-Left Royal Heritage Badge */}
+                <div className="absolute top-3.5 left-3.5 px-3 py-1.5 rounded-xl bg-gold-gradient text-wine-950 font-black text-xs uppercase tracking-widest shadow-gold-sm flex items-center gap-2">
+                  <Logo size="xs" />
+                  <span>Royal Heritage</span>
                 </div>
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-cream-100">
+              </div>
+
+              {/* 2. Dedicated Content Area Below Image */}
+              <div className="p-6 sm:p-7 flex flex-col space-y-4">
+                
+                {/* Badges & Category Row */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-wine-900 border border-gold-500/40 text-gold-300 text-xs font-bold shadow-sm">
+                    <ChefHat className="w-3.5 h-3.5 text-gold-400" />
+                    <span>Artisan Dum Pukht</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-wine-850 border border-gold-500/30 text-cream-200 text-xs font-semibold shadow-sm">
+                    <span className="text-gold-400 font-serif">★</span>
+                    <span>Master Khansama Craft</span>
+                  </div>
+                </div>
+
+                {/* Food Name / Title */}
+                <h3 className="font-serif text-2xl sm:text-3xl font-black text-cream-100 leading-snug break-words">
                   Slow-Cooked Awadhi Heritage
                 </h3>
-              </div>
-            </div>
 
-            {/* Overlapping Floating Inset Card */}
-            <div className="absolute -bottom-6 -right-4 sm:-bottom-8 sm:right-6 max-w-xs p-5 rounded-3xl bg-wine-card border border-gold-500/50 shadow-gold-md backdrop-blur-xl space-y-2">
-              <div className="flex items-center gap-2.5 text-gold-400">
-                <ChefHat className="w-5 h-5 text-gold-400" />
-                <span className="font-serif text-sm font-bold text-cream-100">
-                  Master Khansama Craft
-                </span>
-              </div>
-              <p className="text-[11px] text-cream-300 leading-relaxed">
-                Recipes perfected across generations of royal court cooks, using secret stone-ground masala potlis and slow coal dum.
-              </p>
-            </div>
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-cream-200/90 font-light leading-relaxed break-words">
+                  Recipes perfected across generations of royal court cooks, using secret stone-ground masala potlis and slow coal dum.
+                </p>
 
-            {/* Top Left Heritage Badge */}
-            <div className="absolute -top-4 -left-4 sm:top-6 sm:-left-6 px-4 py-2 rounded-2xl bg-gold-gradient text-wine-950 font-black text-xs uppercase tracking-widest shadow-gold-sm flex items-center gap-2">
-              <Logo size="sm" />
-              <span>Royal Heritage</span>
+                {/* Features & Craft Attributes */}
+                <div className="pt-3 border-t border-wine-800/80 grid grid-cols-2 gap-3 text-xs text-cream-300">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-gold-400 flex-shrink-0" />
+                    <span className="font-medium">Charcoal Dum Cooked</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-gold-400 flex-shrink-0" />
+                    <span className="font-medium">Clay Handi Sealed</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

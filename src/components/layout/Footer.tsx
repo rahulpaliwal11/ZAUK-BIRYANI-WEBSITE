@@ -97,8 +97,13 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="#delivery" className="hover:text-gold-300 transition-colors">
+                  Doorstep Delivery
+                </a>
+              </li>
+              <li>
                 <a href="#offers" className="hover:text-gold-300 transition-colors">
-                  Special Privileges &amp; Offers
+                  Special Offer
                 </a>
               </li>
               <li>
@@ -155,7 +160,7 @@ export const Footer: React.FC = () => {
               Join The Royal Club
             </h4>
             <p className="text-xs text-cream-300 mb-3 leading-relaxed">
-              Subscribe to receive exclusive festive discounts, secret chef recipes &amp; tasting invites.
+              Subscribe to receive seasonal updates, chef specials &amp; tasting invites.
             </p>
 
             {subscribed ? (

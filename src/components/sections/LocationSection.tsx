@@ -86,12 +86,23 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onOpenReservat
                 <p className="text-xs text-cream-300">
                   For instant delivery, bulk catering or party handi orders:
                 </p>
-                <div className="pt-1 flex flex-wrap gap-3">
+                <div className="pt-1 flex flex-wrap items-center gap-3">
                   <a
                     href={`tel:${RESTAURANT_INFO.phone}`}
                     className="font-serif text-sm font-bold text-gold-300 hover:underline"
                   >
                     {RESTAURANT_INFO.phone}
+                  </a>
+                  <span className="text-wine-700">•</span>
+                  <a
+                    href={`https://wa.me/${RESTAURANT_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                      `Hello ${RESTAURANT_INFO.name}, I would like to inquire about party catering / delivery.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#25D366] hover:underline"
+                  >
+                    <span>Chat on WhatsApp</span>
                   </a>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-cream-400 pt-1">
